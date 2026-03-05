@@ -1,0 +1,24 @@
+{
+  "name": "utahux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --port 5174"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenCrab/utahux.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BenCrab/utahux/issues"
+  },
+  "homepage": "https://github.com/BenCrab/utahux#readme",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
