@@ -71,7 +71,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 12px;
-  margin-left: 28px;
+  margin-left: 0;
 }
 .page-item {
   display: flex;
@@ -92,6 +92,13 @@
   line-height: 24px;
 }
 
+/* Key enhancement cards */
+.outcome-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Investment */
 .investment-block {
   margin-top: 48px;
@@ -106,50 +113,68 @@
   line-height: 56px;
 }
 
-/* Bullet lists */
+/* Numbered bullet lists */
 .maintain-list {
   list-style: none;
   padding: 0;
   margin-top: 12px;
+  counter-reset: maintain-counter;
 }
 .maintain-list li {
-  padding: 8px 0 8px 28px;
+  padding: 8px 0 8px 36px;
   position: relative;
   font-size: 18px;
   font-weight: 300;
   line-height: 28px;
+  counter-increment: maintain-counter;
 }
 .maintain-list li::before {
-  content: '';
+  content: counter(maintain-counter);
   position: absolute;
   left: 0;
-  top: 16px;
-  width: 12px;
-  height: 12px;
+  top: 8px;
+  width: 24px;
+  height: 24px;
   background: var(--main);
   border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 .deliver-list {
   list-style: none;
   padding: 0;
   margin-top: 12px;
+  counter-reset: deliver-counter;
 }
 .deliver-list li {
-  padding: 6px 0 6px 28px;
+  padding: 6px 0 6px 36px;
   position: relative;
   font-size: 18px;
   font-weight: 300;
   line-height: 28px;
+  counter-increment: deliver-counter;
 }
 .deliver-list li::before {
-  content: '';
+  content: counter(deliver-counter);
   position: absolute;
   left: 0;
-  top: 14px;
-  width: 12px;
-  height: 12px;
+  top: 7px;
+  width: 24px;
+  height: 24px;
   background: var(--main);
   border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* Layout: sideline + dots */
@@ -276,7 +301,7 @@
   <div class="wrapper">
     <div class="container-narrow project-narrow">
       <div class="back-btn-container" style="padding-bottom:48px;">
-        <h4 class="light-blue" style="margin:0;">March 31, 2026</h4>
+        <h4 class="light-blue" style="margin:0;">April 2, 2026</h4>
       </div>
       <div style="margin-bottom:8px;">
         <h4 class="light-blue" style="margin:0;">Proposal on Behalf of</h4>
@@ -329,9 +354,8 @@
           <div class="p-default mt-12">A complete redesign and rebuild—moving beyond the limitations of WordPress to a custom, high-performance site with a content management system you control. All existing content will be migrated and improved, including all 39 blog posts, service descriptions, testimonials, and legal pages. The site will auto-publish when you make changes—no developer needed.</div>
 
           <ul class="deliver-list mt-12">
-            <li><strong>Full website redesign</strong>—custom design system with content management system, responsive across all devices including the following pages:</li>
-          </ul>
-          <div class="pages-grid" style="margin-top:12px;">
+            <li><strong>Full website redesign</strong>—custom design system with content management system, responsive across all devices including the following pages:
+          <div class="pages-grid" style="margin-top:12px; margin-bottom:12px;">
             <div class="page-item">
               <span class="page-name">Homepage</span>
               <span class="page-desc">Hero with headshot, service highlights, testimonial carousel, YouTube videos, latest blog posts, showcase case studies, newsletter signup</span>
@@ -365,11 +389,12 @@
               <span class="page-desc">Full original content will be migrated</span>
             </div>
           </div>
-          <ul class="deliver-list" style="margin-top:12px;">
+            </li>
             <li><strong>Content migration &amp; management</strong>—all 39 blog posts migrated into a visual content portal for ongoing editing</li>
             <li><strong>SEO setup</strong>—optimized titles, meta descriptions, Open Graph tags, structured data, XML sitemap</li>
             <li><strong>AI/LLM discoverability</strong>—llms.txt and comprehensive schema markup</li>
             <li><strong>Newsletter signup</strong>—integrated with email service for subscriber management</li>
+            <li><strong>URL redirects</strong>—301 redirects from all existing WordPress URLs to their new equivalents so search rankings and bookmarks are preserved</li>
             <li><strong>Deployment</strong>—live on hosting of your choice</li>
           </ul>
         </div>
@@ -425,7 +450,7 @@
               <tr>
                 <td>Lead Capture</td>
                 <td class="before">Contact form only</td>
-                <td class="after">Contact form + newsletter signup across the site</td>
+                <td class="after">Contact form and email collection across the site</td>
               </tr>
               <tr>
                 <td>Performance</td>
@@ -435,11 +460,11 @@
               <tr>
                 <td>Accessibility</td>
                 <td class="before">Theme-level gaps in alt text, headings</td>
-                <td class="after">Fully WCAG 2.2 AA compliant</td>
+                <td class="after">Designed to meet WCAG 2.2 AA standards</td>
               </tr>
               <tr>
                 <td>Broken Links</td>
-                <td class="before">4 broken</td>
+                <td class="before">5 broken</td>
                 <td class="after">Zero</td>
               </tr>
               <tr>
@@ -449,12 +474,12 @@
               </tr>
               <tr>
                 <td>Hosting Cost</td>
-                <td class="before">Paid WordPress hosting</td>
+                <td class="before">Paid Namecheap hosting</td>
                 <td class="after">Free hosting with automatic SSL and global CDN</td>
               </tr>
               <tr>
                 <td>Form Submissions</td>
-                <td class="before">Basic WordPress form</td>
+                <td class="before">WPForms</td>
                 <td class="after">Smart contact form with service pre-selection, submissions to your inbox</td>
               </tr>
             </tbody>
@@ -480,7 +505,7 @@
           </ul>
         </div>
 
-        <!-- RECOMMENDED SERVICES -->
+        <!--
         <div class="head-para">
           <div class="head-dot-container">
             <img src="https://www.utahux.com/cdn.prod.website-files.com/621d3937308a160b5f994de9/6220e1986e74944815e6f4a5_Frame%2054.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot"/>
@@ -500,11 +525,6 @@
                 <td>Contact form submissions</td>
                 <td>Serverless form handler→email</td>
                 <td>Free</td>
-              </tr>
-              <tr>
-                <td>Newsletter subscriptions</td>
-                <td>Email marketing service</td>
-                <td>Free tier available</td>
               </tr>
               <tr>
                 <td>Content editing</td>
@@ -541,14 +561,10 @@
                 <td>Privacy-friendly web analytics</td>
                 <td>Free</td>
               </tr>
-              <tr>
-                <td>Email for new posts</td>
-                <td>Automatic email to subscribers on new posts</td>
-                <td>Free tier available</td>
-              </tr>
             </tbody>
           </table>
         </div>
+        -->
 
         <!-- INVESTMENT -->
         <div class="head-para investment-block">
@@ -560,26 +576,24 @@
           <h3 class="blue mt-16">PAYMENT</h3>
           <div class="p-default">50% upfront, 50% on delivery. Scope includes everything described above: design, development, content migration, SEO setup, deployment to your hosting of choice.</div>
 
-          <h3 class="blue mt-16">TIMELINE</h3>
-          <div class="p-default">Estimated 2–3 weeks from kickoff, dependent on timely feedback and content from you.</div>
-
-          <h3 class="blue mt-16">REVISIONS</h3>
-          <div class="p-default">Three rounds of revisions are included during the design process. After final delivery, one round of revisions is included—covering a consolidated list of changes to the complete site. Additional rounds after that are billed at $150/hour.</div>
+          <h3 class="blue mt-16">TIMELINE &amp; REVISIONS</h3>
+          <div class="p-default">Estimated 3–4 weeks from kickoff. Each week, I'll send you an updated revision 24 hours before our scheduled 30-minute sync. During each sync, we'll walk through your feedback together. Three revision cycles are included during the design process. After final delivery, one round of revisions is included—covering a consolidated list of changes to the complete site. Additional rounds after that are billed at $150/hour.</div>
 
           <h3 class="blue mt-16">OWNERSHIP</h3>
           <div class="p-default">You own the final site and all deliverables. I retain the right to feature the work in my portfolio. A copy of the site code will be maintained as a backup for continuity.</div>
 
-          <h3 class="blue mt-16">WHAT WE NEED FROM YOU</h3>
-          <ul class="deliver-list">
-            <li>Case studies content</li>
-            <li>Approval of headshot and bio</li>
-          </ul>
+          <h3 class="blue mt-16">WHAT'S NOT INCLUDED</h3>
+          <div class="p-default">Ongoing maintenance or future design changes beyond the initial handoff. Day-to-day content updates (blog posts, case studies, videos, events) are handled via the CMS. Additional features, functionality, or pages would be scoped as a separate project.</div>
 
           <h3 class="blue mt-16">AGREEMENT</h3>
           <div class="p-default">Replying to the email where this proposal was sent with your approval constitutes agreement to begin work under the terms outlined above.</div>
 
-          <h3 class="blue mt-16">WHAT'S NOT INCLUDED</h3>
-          <div class="p-default">Ongoing maintenance or future design changes beyond the initial handoff. Day-to-day content updates (blog posts, case studies, videos, events) are handled by you through the content portal at no additional cost. Additional features, functionality, or pages would be scoped as a separate project.</div>
+          <h3 class="blue mt-16">NEXT STEPS</h3>
+          <ul class="deliver-list">
+            <li>Proposal review call</li>
+            <li>Reply to proposal email with your approval</li>
+            <li>Schedule kickoff meeting</li>
+          </ul>
         </div>
 
       </div>
@@ -594,10 +608,9 @@
   <div class="container-narrow footer">
     <div class="container-head">
       <div class="ch-left footer">
-        <h2 class="h2 white">Ready to Move Forward?</h2>
-        <div class="p-default white footer-p">Let's discuss next steps.</div>
+        <h2 class="h2 white">Ready to Review Proposal?</h2>
         <div class="embed-footer w-embed w-script" style="margin-top:12px;">
-          <button type="button" class="btn-secondary with-arrow dark-hover" onclick="if(!window._calLoaded){var l=document.createElement('link');l.rel='stylesheet';l.href='https://assets.calendly.com/assets/external/widget.css';document.head.appendChild(l);var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.onload=function(){Calendly.initPopupWidget({url:'https://calendly.com/utahux/30min'})};document.head.appendChild(s);window._calLoaded=true}else{Calendly.initPopupWidget({url:'https://calendly.com/utahux/30min'})}return false;" style="display:inline-flex;">Schedule a time to chat</button>
+          <button type="button" class="btn-secondary with-arrow dark-hover" onclick="if(!window._calLoaded){var l=document.createElement('link');l.rel='stylesheet';l.href='https://assets.calendly.com/assets/external/widget.css';document.head.appendChild(l);var s=document.createElement('script');s.src='https://assets.calendly.com/assets/external/widget.js';s.onload=function(){Calendly.initPopupWidget({url:'https://calendly.com/utahux/proposal-review'})};document.head.appendChild(s);window._calLoaded=true}else{Calendly.initPopupWidget({url:'https://calendly.com/utahux/proposal-review'})}return false;" style="display:inline-flex;">Schedule a time to chat</button>
         </div>
         <div class="proposal-branding">
           <a href="https://www.utahux.com/index.html" class="brand w-nav-brand" style="display:block;"><img src="https://www.utahux.com/cdn.prod.website-files.com/621d3937308a160b5f994de9/62219237905f009aa25e7fd5_Group%202088.svg" loading="lazy" alt="Utah UX logo"/></a>
