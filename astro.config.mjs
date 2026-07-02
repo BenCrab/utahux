@@ -2,9 +2,11 @@ import { defineConfig } from 'astro/config';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { loadEnv } from 'vite';
 
-const projectId = process.env.PUBLIC_SANITY_PROJECT_ID ?? 'placeholder';
-const dataset = process.env.PUBLIC_SANITY_DATASET ?? 'production';
+const env = loadEnv(process.env.NODE_ENV ?? 'production', process.cwd(), '');
+const projectId = env.PUBLIC_SANITY_PROJECT_ID ?? process.env.PUBLIC_SANITY_PROJECT_ID ?? 'placeholder';
+const dataset = env.PUBLIC_SANITY_DATASET ?? process.env.PUBLIC_SANITY_DATASET ?? 'production';
 
 export default defineConfig({
   site: 'https://www.utahux.com',

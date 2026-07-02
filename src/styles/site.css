@@ -58,3 +58,8 @@ button,
 *:focus {
   outline: 0;
 }
+
+/* Equivalent of Webflow's .last-job modifier for CMS-rendered groups */
+.h4-and-text .p-default.jobs:last-child {
+  padding-bottom: 0;
+}

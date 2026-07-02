@@ -10,9 +10,13 @@ interface Props {
 }
 
 const { asset, alt = '', class: className, sizes, loading = 'lazy' } = Astro.props;
-const srcset = asset
-  ? sanitySrcset({ url: asset.url, width: asset.metadata?.dimensions?.width })
-  : undefined;
+const nativeWidth = asset?.metadata?.dimensions?.width;
+const srcset = asset ? sanitySrcset({ url: asset.url, width: nativeWidth }) : undefined;
+// Mirror Webflow's sizes pattern so the intrinsic display width stays the
+// image's natural width (a bare `sizes="100vw"` would upscale to viewport).
+const defaultSizes = nativeWidth
+  ? `(max-width: ${nativeWidth}px) 100vw, ${nativeWidth}px`
+  : '100vw';
 ---
 
 {
@@ -20,7 +24,7 @@ const srcset = asset
     <img
       src={sanitySrc(asset.url)}
       srcset={srcset}
-      sizes={srcset ? (sizes ?? '100vw') : undefined}
+      sizes={srcset ? (sizes ?? defaultSizes) : undefined}
       alt={alt}
       class={className}
       loading={loading}

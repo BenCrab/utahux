@@ -4,13 +4,14 @@ import Block from './pt/Block.astro';
 import BlockPlain from './pt/BlockPlain.astro';
 import BlockWhite from './pt/BlockWhite.astro';
 import BlockNet from './pt/BlockNet.astro';
+import BlockJobs from './pt/BlockJobs.astro';
 import List from './pt/List.astro';
 import Link from './pt/Link.astro';
 import InlineLink from './pt/InlineLink.astro';
 
 interface Props {
   value: unknown;
-  variant?: 'default' | 'plain' | 'white' | 'net';
+  variant?: 'default' | 'plain' | 'white' | 'net' | 'jobs';
 }
 
 const { value, variant = 'default' } = Astro.props;
@@ -20,6 +21,7 @@ const blockComponent = {
   plain: BlockPlain,
   white: BlockWhite,
   net: BlockNet,
+  jobs: BlockJobs,
 }[variant];
 
 const components = {

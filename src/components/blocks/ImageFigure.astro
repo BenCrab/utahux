@@ -14,10 +14,12 @@ const {
 
 const imgClass = {
   photo: 'photo mt-12',
-  shadowFigma: 'photo mt-12 image-with-shadow-from-figma',
+  shadowFigma: 'image-with-shadow-from-figma',
+  photoShadow: 'photo mt-12 image-with-shadow-from-figma',
+  questions: 'photo mt-12 questions',
   plain: '',
   scopeDoc: 'scope-doc',
-}[style as 'photo' | 'shadowFigma' | 'plain' | 'scopeDoc'];
+}[style as string];
 
 const lightboxHref = lightboxImage?.asset?.url ?? (expandIcon ? image?.asset?.url : undefined);
 const pdfHref = linkToPdf?.asset?.url;

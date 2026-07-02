@@ -3,5 +3,16 @@ const { node } = Astro.props;
 const isNumber = node.listItem === 'number';
 ---
 
-{isNumber && <ol role="list" class="ol"><slot /></ol>}
-{!isNumber && <ul role="list" class="ul"><slot /></ul>}
+{
+  isNumber ? (
+    <div class="p-default mt-12">
+      <ol role="list" class="ol">
+        <slot />
+      </ol>
+    </div>
+  ) : (
+    <ul role="list" class="ul">
+      <slot />
+    </ul>
+  )
+}
