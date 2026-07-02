@@ -5,7 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
 
 const env = loadEnv(process.env.NODE_ENV ?? 'production', process.cwd(), '');
-const projectId = env.PUBLIC_SANITY_PROJECT_ID ?? process.env.PUBLIC_SANITY_PROJECT_ID ?? 'placeholder';
+// Public project ID / public dataset — not secrets (the ID appears in every
+// cdn.sanity.io asset URL), so safe to default here for CI builds.
+const projectId = env.PUBLIC_SANITY_PROJECT_ID ?? process.env.PUBLIC_SANITY_PROJECT_ID ?? '71kxkqkh';
 const dataset = env.PUBLIC_SANITY_DATASET ?? process.env.PUBLIC_SANITY_DATASET ?? 'production';
 
 export default defineConfig({
