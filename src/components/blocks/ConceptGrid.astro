@@ -1,0 +1,46 @@
+---
+import RichText from '../RichText.astro';
+import SanityImage from '../SanityImage.astro';
+
+const { node } = Astro.props;
+const { headingPrefix, headingSuffix, hypothesis, cards = [] } = node;
+
+const statusClass = (status: string) =>
+  ({
+    success: 'status success',
+    failure: 'status failure',
+    savedForLater: 'status saved-for-later',
+  })[status] ?? 'status';
+
+const imgClass = (style: string) => (style === 'screenshot' ? 'image-9' : 'paper-proto-image');
+---
+
+<div class="head-para concept-p">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" class="line-dot" />
+    <h4 class="blue mt-16 main-line">
+      {headingPrefix}{
+        headingSuffix && (
+          <>
+            {' • '}
+            <span class="regular-text">{headingSuffix}</span>
+          </>
+        )
+      }
+    </h4>
+  </div>
+  <RichText value={hypothesis} variant="plain" />
+  <div class="cards-side-by-side">
+    {
+      cards.map((card: any, i: number) => (
+        <div class={i === cards.length - 1 ? 'right' : 'left'}>
+          <SanityImage asset={card.image?.asset} alt="" class={imgClass(card.imageStyle)} />
+          <div class="p-default-bold larger concept">Concept:</div>
+          <div>{card.title}</div>
+          <div class={statusClass(card.status)}>{card.statusText}</div>
+          {card.credit && <div class="gray-span small sub-line">{card.credit}</div>}
+        </div>
+      ))
+    }
+  </div>
+</div>

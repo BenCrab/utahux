@@ -1,0 +1,11 @@
+---
+// Default block renderer: paragraph classes match the Webflow export.
+const { node } = Astro.props;
+const style = node.style ?? 'normal';
+---
+
+{style === 'normal' && <div class="p-default mt-12"><slot /></div>}
+{style === 'grey' && <div class="p-default grey"><slot /></div>}
+{style === 'h3' && <h3><slot /></h3>}
+{style === 'h4' && <h4 class="blue mt-16"><slot /></h4>}
+{style === 'largeBold' && <div class="p-default-bold large mt-12"><slot /></div>}

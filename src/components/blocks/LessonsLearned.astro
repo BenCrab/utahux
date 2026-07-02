@@ -1,0 +1,13 @@
+---
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" class="line-dot" />
+    <h2>{node.heading ?? 'Lessons Learned'}</h2>
+  </div>
+  <ul role="list" class="ol lessons">
+    {(node.items ?? []).map((item: string) => <li class="large-item">{item}<br /></li>)}
+  </ul>
+</div>

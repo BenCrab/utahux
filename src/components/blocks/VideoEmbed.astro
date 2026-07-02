@@ -1,0 +1,50 @@
+---
+const { node } = Astro.props;
+const { youtubeId, title = 'Video' } = node;
+---
+
+<div class="vid-container">
+  <div style="padding-top:56.17021276595745%" class="video w-video w-embed">
+    <button
+      type="button"
+      class="yt-facade"
+      data-yt-id={youtubeId}
+      aria-label={`Play video: ${title}`}
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#000;"
+    >
+      <img
+        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+        alt={title}
+        loading="lazy"
+        style="width:100%;height:100%;object-fit:cover;"
+      />
+      <span
+        aria-hidden="true"
+        style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;"
+      >
+        <svg viewBox="0 0 68 48" width="68" height="48">
+          <path
+            d="M66.52 7.74a8 8 0 0 0-5.66-5.66C55.79.36 34 .36 34 .36S12.21.36 7.14 2.08a8 8 0 0 0-5.66 5.66C-.24 12.81-.24 24-.24 24s0 11.19 1.72 16.26a8 8 0 0 0 5.66 5.66C12.21 47.64 34 47.64 34 47.64s21.79 0 26.86-1.72a8 8 0 0 0 5.66-5.66C68.24 35.19 68.24 24 68.24 24s0-11.19-1.72-16.26z"
+            fill="#f00"></path>
+          <path d="M45 24 27 14v20" fill="#fff"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.yt-facade').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.ytId;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.title = btn.getAttribute('aria-label') ?? 'Video';
+      iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0';
+      btn.replaceWith(iframe);
+    });
+  });
+</script>

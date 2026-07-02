@@ -1,0 +1,80 @@
+---
+import Nav from './Nav.astro';
+---
+
+<div id="top" class="section hero">
+  <div class="wrapper">
+    <Nav />
+    <div class="container-narrow center-center-horizontal">
+      <div class="hero-left">
+        <div class="hello-mobile">
+          <div class="hi-left">
+            <img
+              src="/assets/wave.png"
+              loading="lazy"
+              alt="hand waving emoji"
+              class="wave"
+              width="64"
+              height="64"
+              style="image-rendering: -webkit-optimize-contrast;"
+            />
+            <div class="p-default hi-snip-mobile">Hey, I’m Ben.<br />I run Utah UX.</div>
+          </div>
+          <img
+            src="/assets/profile.png"
+            loading="lazy"
+            alt="a portrait photo of ben crabtree"
+            class="profile-mobile"
+          />
+        </div>
+        <h1 class="h1">How can I benefit your life through design?</h1>
+        <div class="p-default hero-p">
+          This is the question at the core of my UX design practice—both in relation to the
+          organizations I serve and the customers who use the products I help create.
+        </div>
+        <div class="ctas">
+          <a href="#projects" class="btn-primary left-btn w-button">View Projects</a>
+          <a
+            href="/crabtree-2026.pdf"
+            target="_blank"
+            class="btn-secondary no-fill no-white-fill-on-hover w-button">View Résumé</a
+          >
+        </div>
+      </div>
+      <div class="hero-right">
+        <img
+          src="/assets/profile.png"
+          loading="eager"
+          fetchpriority="high"
+          alt="a portrait photo of ben crabtree"
+          class="image"
+        />
+        <div class="hello">
+          <img
+            src="/assets/wave.png"
+            loading="lazy"
+            alt="hand waving emoji"
+            class="wave"
+            width="64"
+            height="64"
+            style="image-rendering: -webkit-optimize-contrast;"
+          />
+          <div class="p-default hey-snippet">Hey, I’m Ben. I run Utah UX.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('.wave').forEach(function (w) {
+    w.addEventListener('click', function () {
+      w.classList.remove('waving');
+      void w.offsetWidth; // reflow to restart animation
+      w.classList.add('waving');
+    });
+    w.addEventListener('animationend', function () {
+      w.classList.remove('waving');
+    });
+  });
+</script>

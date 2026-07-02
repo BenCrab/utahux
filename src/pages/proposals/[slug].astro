@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ObjectiveSection from '../../components/proposal/ObjectiveSection.astro';
+import ScopeSection from '../../components/proposal/ScopeSection.astro';
+import CardsSection from '../../components/proposal/CardsSection.astro';
+import MaintainSection from '../../components/proposal/MaintainSection.astro';
+import ProposalProcessSection from '../../components/proposal/ProposalProcessSection.astro';
+import InvestmentSection from '../../components/proposal/InvestmentSection.astro';
+import GenericSection from '../../components/proposal/GenericSection.astro';
+import { loadQuery } from '../../lib/sanity';
+import { proposalsQuery } from '../../lib/queries';
+import '../../styles/proposal.css';
+
+export async function getStaticPaths() {
+  const proposals = await loadQuery<any[]>(proposalsQuery, {}, []);
+  return proposals
+    .filter((p) => p.slug)
+    .map((p) => ({ params: { slug: p.slug }, props: { proposal: p } }));
+}
+
+const { proposal } = Astro.props;
+
+const sectionComponents: Record<string, any> = {
+  objectiveSection: ObjectiveSection,
+  scopeSection: ScopeSection,
+  cardsSection: CardsSection,
+  maintainSection: MaintainSection,
+  proposalProcessSection: ProposalProcessSection,
+  investmentSection: InvestmentSection,
+  genericSection: GenericSection,
+};
+
+const formattedDate = proposal.proposalDate
+  ? new Date(`${proposal.proposalDate}T00:00:00`).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+  : undefined;
+
+const calendlyUrl = proposal.calendlyUrl ?? 'https://calendly.com/utahux/proposal-review';
+---
+
+<BaseLayout
+  title={proposal.title}
+  bodyClass="body-project"
+  noindex={proposal.noindex !== false}
+>
+  <div id="top" class="section-project">
+    <div class="wrapper">
+      <div class="container-narrow project-narrow">
+        <div class="back-btn-container" style="padding-bottom:48px;">
+          <h4 class="light-blue" style="margin:0;">{formattedDate}</h4>
+        </div>
+        <div style="margin-bottom:8px;">
+          <h4 class="light-blue" style="margin:0;">{proposal.onBehalfLabel ?? 'Proposal on Behalf of'}</h4>
+        </div>
+        <div class="project-logo-name" style="justify-content:flex-start; align-items:center;">
+          <div class="project-company-name" style="margin-left:0;">
+            <h1 class="h1 white project-head" style="margin-bottom:0;" id="proposal-title">
+              {proposal.clientName}
+            </h1>
+          </div>
+          {
+            proposal.clientLogo?.asset?.url && (
+              <div style="width:48px; height:48px; border-radius:1000px; overflow:hidden; flex-shrink:0; margin-left:16px;">
+                <img
+                  src={proposal.clientLogo.asset.url}
+                  loading="lazy"
+                  alt={`${proposal.clientName} logo`}
+                  style="width:48px; height:48px; object-fit:cover;"
+                />
+              </div>
+            )
+          }
+        </div>
+        <div class="team-roles">
+          <div>
+            <h4 class="light-blue">FOR</h4>
+            <div class="p-default white" style="line-height:24px;">
+              <strong>{proposal.forPerson?.name}</strong><br />{proposal.forPerson?.title}
+            </div>
+          </div>
+          <div class="div-block-4">
+            <h4 class="light-blue">BY</h4>
+            <div class="p-default white" style="line-height:24px;">
+              <strong>{proposal.byPerson?.name ?? 'Ben Crabtree'}</strong><br />{
+                proposal.byPerson?.title ?? 'Sr. Designer, Utah UX'
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="section content-section">
+      <div class="wrapper top-wrap">
+        <div class="container-wide project-head">
+          <div class="sideline"></div>
+          <div class="main-content">
+            {
+              (proposal.sections ?? []).map((section: any) => {
+                const Component = sectionComponents[section._type];
+                return Component ? <Component node={section} /> : null;
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="container-wide footer pro-foot">
+    <div class="container-narrow footer">
+      <div class="container-head">
+        <div class="ch-left footer">
+          <h2 class="h2 white">{proposal.footerHeading ?? 'Ready to Review Proposal?'}</h2>
+          <div class="embed-footer w-embed w-script" style="margin-top:12px;">
+            <button
+              type="button"
+              class="btn-secondary with-arrow dark-hover"
+              data-calendly-url={calendlyUrl}
+              style="display:inline-flex;">Schedule Proposal Review</button
+            >
+          </div>
+          <div class="proposal-branding">
+            <a href="https://www.utahux.com/" class="brand w-nav-brand" style="display:block;">
+              <img src="/assets/utahux-logo-white.svg" loading="lazy" alt="Utah UX logo" />
+            </a>
+            <div class="p-default white copyright">
+              © {proposal.copyrightYear ?? '2026'}, Utah UX, LLC
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../scripts/calendly.js"></script>
+</BaseLayout>

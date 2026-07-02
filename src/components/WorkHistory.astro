@@ -1,0 +1,59 @@
+---
+const places = [
+  { logo: '/assets/logo-byu.svg', logoClass: 'place-logo', name: 'BYU MOA', role: 'iOS UI Design', years: '2013-14' },
+  { logo: '/assets/logo-riser.svg', logoClass: 'place-logo', name: 'Riser', role: 'Design', years: '2014–14', extraClass: 'second-place' },
+  { logo: '/assets/logo-trace.svg', logoClass: 'place-logo', name: 'Trace', role: 'UX Design', years: '2015–15' },
+  { logo: '/assets/logo-byu.svg', logoClass: 'place-logo', name: 'BYU Library', role: 'UX Design', years: '2015–18' },
+  { logo: '/assets/logo-ancestry-small.svg', logoClass: 'place-logo ancestry-logo', name: 'Ancestry', role: 'UX Design', years: '2018-20' },
+  { logo: '/assets/logo-lendio-small.svg', logoClass: 'place-logo', name: 'Lendio', role: 'Sr. UX Design', years: '2020-21' },
+];
+---
+
+<div class="container-wide work-history">
+  <div class="container-narrow history">
+    <div class="container-head freelance">
+      <h2 class="heading">Work History</h2>
+      <a href="/crabtree-2026.pdf" target="_blank" class="btn-secondary with-arrow w-inline-block">
+        <div class="text-block">View Résumé</div>
+        <img src="/assets/arrow-right.svg" loading="lazy" alt="" class="arrow-right" />
+      </a>
+    </div>
+    <div class="for-mobile-stack">
+      <div class="timeline-dates">
+        <div class="p-default semi grey left-date">2013</div>
+        <div class="freelance-timeline-wrapper">
+          <div class="freelance-timeline">
+            <div class="ut-ux-box">
+              <img
+                src="/assets/utahux-logo.svg"
+                loading="lazy"
+                alt="utah ux company logo"
+                class="utah-ux small"
+              />
+              <div class="p-default semi grey freelance-span">Sr. UX Freelance 2019</div>
+            </div>
+            <div class="div-block"></div>
+            <img src="/assets/dot.svg" loading="lazy" alt="" class="timeline-dot fl-dot" />
+          </div>
+          <div class="p-default semi grey right-date">Now</div>
+        </div>
+      </div>
+      <div class="places">
+        {
+          places.map((p) => (
+            <div class:list={['place', p.extraClass]}>
+              <img src="/assets/dot.svg" loading="lazy" alt="" class="timeline-dot" />
+              <div class="place-holder-mobile">
+                <img src={p.logo} loading="lazy" alt="" class={p.logoClass} />
+                <div class="p-default-bold">{p.name}</div>
+                <div class="p-small semi sub-line">{p.role}</div>
+                <div class="p-small">{p.years}</div>
+              </div>
+            </div>
+          ))
+        }
+        <div class="place palceholder"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+---
+import SanityImage from '../SanityImage.astro';
+
+const { node } = Astro.props;
+const {
+  image,
+  alt = '',
+  style = 'photo',
+  label,
+  expandIcon = false,
+  lightboxImage,
+  linkToPdf,
+} = node;
+
+const imgClass = {
+  photo: 'photo mt-12',
+  shadowFigma: 'photo mt-12 image-with-shadow-from-figma',
+  plain: '',
+  scopeDoc: 'scope-doc',
+}[style as 'photo' | 'shadowFigma' | 'plain' | 'scopeDoc'];
+
+const lightboxHref = lightboxImage?.asset?.url ?? (expandIcon ? image?.asset?.url : undefined);
+const pdfHref = linkToPdf?.asset?.url;
+---
+
+{label && <h4 class="blue mt-16">{label}</h4>}
+{
+  pdfHref ? (
+    <a href={pdfHref} target="_blank" class="w-inline-block">
+      <div class="image-icon-holder">
+        <SanityImage asset={image?.asset} alt={alt} class={imgClass} />
+        {expandIcon && <img src="/assets/expand.svg" loading="lazy" alt="" class="expand" />}
+      </div>
+    </a>
+  ) : lightboxHref ? (
+    <div class="image-icon-holder">
+      <a href={lightboxHref} class="w-inline-block glightbox" data-gallery="figures">
+        <SanityImage asset={image?.asset} alt={alt} class={imgClass} />
+        {expandIcon && <img src="/assets/expand.svg" loading="lazy" alt="" class="expand" />}
+      </a>
+    </div>
+  ) : style === 'plain' || style === 'scopeDoc' ? (
+    <SanityImage asset={image?.asset} alt={alt} class={imgClass || undefined} />
+  ) : (
+    <div class="image-icon-holder">
+      <SanityImage asset={image?.asset} alt={alt} class={imgClass} />
+    </div>
+  )
+}

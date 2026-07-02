@@ -1,0 +1,64 @@
+---
+import RichText from './RichText.astro';
+
+interface Props {
+  outcome: {
+    intro?: unknown;
+    kpiLabel?: string;
+    kpis?: { value?: string; subValue?: string; label?: string }[];
+    netProfitLabel?: string;
+    netProfit?: unknown;
+    disclaimer?: string;
+    extraContent?: unknown;
+  };
+}
+
+const { outcome } = Astro.props;
+const kpis = outcome.kpis ?? [];
+const hasBottom =
+  kpis.length > 0 ||
+  Boolean(outcome.netProfit && (outcome.netProfit as unknown[]).length) ||
+  Boolean(outcome.extraContent && (outcome.extraContent as unknown[]).length);
+---
+
+<div class="head-para outcome">
+  <div class={hasBottom ? 'top' : 'top rounded'}>
+    <div class="step-head-container">
+      <img src="/assets/dot.svg" loading="lazy" alt="" class="line-dot outcome" />
+      <h2 class="white">The Outcome</h2>
+    </div>
+    <RichText value={outcome.intro} variant="white" />
+  </div>
+  {
+    hasBottom && (
+      <div class="bottom">
+        {kpis.length > 0 && (
+          <>
+            <h4 class="blue mt-16 main-line">{outcome.kpiLabel ?? 'KPI RESULTS'}</h4>
+            <div class="outcome-cards">
+              {kpis.map((kpi, i) => (
+                <div class={i === kpis.length - 1 ? 'outcome-card last-card' : 'outcome-card'}>
+                  <h2 class="blue kpi">{kpi.value}</h2>
+                  <div class="p-default light-blue kpi">{kpi.subValue}</div>
+                  <div class="p-default-bold kpi">{kpi.label}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        {Boolean(outcome.netProfit && (outcome.netProfit as unknown[]).length) && (
+          <>
+            <h4 class="blue mt-16">{outcome.netProfitLabel ?? 'NET PROFIT'}</h4>
+            <RichText value={outcome.netProfit} variant="net" />
+          </>
+        )}
+        {outcome.disclaimer && (
+          <div class="p-default grey no-leading-heading">
+            <span class="inline-link">*</span> {outcome.disclaimer}
+          </div>
+        )}
+        <RichText value={outcome.extraContent} />
+      </div>
+    )
+  }
+</div>

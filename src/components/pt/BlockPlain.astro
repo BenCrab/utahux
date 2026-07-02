@@ -1,0 +1,12 @@
+---
+// "plain" variant: normal paragraphs without the mt-12 top margin
+// (hypothesis paragraphs, labeled text bodies).
+const { node } = Astro.props;
+const style = node.style ?? 'normal';
+---
+
+{style === 'normal' && <div class="p-default"><slot /></div>}
+{style === 'grey' && <div class="p-default grey"><slot /></div>}
+{style === 'h3' && <h3><slot /></h3>}
+{style === 'h4' && <h4 class="blue mt-16"><slot /></h4>}
+{style === 'largeBold' && <div class="p-default-bold large mt-12"><slot /></div>}

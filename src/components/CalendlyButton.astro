@@ -1,0 +1,17 @@
+---
+interface Props {
+  url?: string;
+  label: string;
+  class?: string;
+}
+
+const {
+  url = 'https://calendly.com/utahux/30min',
+  label,
+  class: className = 'btn-secondary with-arrow dark-hover',
+} = Astro.props;
+---
+
+<div class="embed-footer w-embed w-script">
+  <a class={className} href="#" data-calendly-url={url}>{label}</a>
+</div>

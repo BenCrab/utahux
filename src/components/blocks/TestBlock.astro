@@ -1,0 +1,10 @@
+---
+const { node } = Astro.props;
+const vert = node.orientation === 'vert';
+---
+
+<div class={vert ? 'test-block vert' : 'test-block'}>
+  <img src="/assets/cycle.svg" loading="lazy" alt="" class="cycle" />
+  <h2 class={vert ? 'blue line-wrap wide' : 'blue line-wrap'}>{node.text}</h2>
+  {node.subtext && <div class="p-default mt-12 grey">{node.subtext}</div>}
+</div>

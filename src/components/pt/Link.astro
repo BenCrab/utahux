@@ -1,0 +1,6 @@
+---
+const { node } = Astro.props;
+const { href, blank = true } = node.markDef ?? {};
+---
+
+<a href={href} target={blank ? '_blank' : undefined}><span class="inline-link"><slot /></span></a>

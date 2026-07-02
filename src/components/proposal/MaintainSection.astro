@@ -1,0 +1,23 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading ?? 'Maintainability'}</h2>
+  </div>
+  <RichText value={node.intro} />
+  <h3 class="blue mt-16">{node.subheading ?? 'WHAT YOU CAN UPDATE ON YOUR OWN'}</h3>
+  <ul class="maintain-list">
+    {
+      (node.items ?? []).map((item: any) => (
+        <li>
+          <strong>{item.heading}</strong>—{item.body}
+        </li>
+      ))
+    }
+  </ul>
+</div>

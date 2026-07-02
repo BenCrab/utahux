@@ -1,0 +1,11 @@
+---
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading ?? 'Core Objective'}</h2>
+  </div>
+  <div class="p-default mt-12" style="font-size:24px; line-height:34px;">{node.lead}</div>
+</div>

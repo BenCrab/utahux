@@ -1,0 +1,24 @@
+---
+import SanityImage from '../SanityImage.astro';
+
+const { node } = Astro.props;
+const images = node.images ?? [];
+const gallery = `scroller-${node._key ?? 'g'}`;
+---
+
+<div class="many-images-scroll">
+  {
+    images.map((item: any) => (
+      <div class="image-icon-holder mult">
+        <a
+          href={item.lightboxImage?.asset?.url ?? item.image?.asset?.url}
+          class="w-inline-block glightbox"
+          data-gallery={gallery}
+        >
+          <SanityImage asset={item.image?.asset} alt={item.alt ?? ''} class="photo mult-photo" />
+          <img src="/assets/expand.svg" loading="lazy" alt="" class="expand less-padding" />
+        </a>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,57 @@
+---
+interface Props {
+  company: string;
+  title: string;
+  logoUrl?: string;
+  teamMembers?: string;
+  myRoles?: string;
+}
+
+const { company, title, logoUrl, teamMembers, myRoles } = Astro.props;
+const teamLines = (teamMembers ?? '').split('\n').filter(Boolean);
+const roleLines = (myRoles ?? '').split('\n').filter(Boolean);
+---
+
+<div id="top" class="section-project">
+  <div class="wrapper">
+    <div class="container-narrow project-narrow">
+      <div class="back-btn-container">
+        <a
+          href="/"
+          class="btn-secondary with-arrow w-inline-block"
+          style="align-items:center;gap:8px"
+        >
+          <img
+            src="/assets/arrow-left.svg"
+            loading="lazy"
+            alt=""
+            class="arrow-left"
+            style="width:13px;height:13px;flex-shrink:0;box-sizing:content-box;padding:0"
+          />
+          <div class="text-block" style="white-space:nowrap">Back to All Projects</div>
+        </a>
+      </div>
+      <div class="project-logo-name">
+        {logoUrl && <img src={logoUrl} loading="lazy" alt="" class="logo" />}
+        <div class="project-company-name">
+          <div class="p-default white top-label">{company}</div>
+          <h1 class="h1 white project-head">{title}</h1>
+        </div>
+      </div>
+      <div class="team-roles">
+        <div>
+          <h4 class="light-blue">TEAM <span class="team-span">MEMBERS</span></h4>
+          <div class="p-default white">
+            {teamLines.map((line, i) => <>{line}{i < teamLines.length - 1 && <br />}</>)}
+          </div>
+        </div>
+        <div class="div-block-4">
+          <h4 class="light-blue">MY ROLES</h4>
+          <div class="p-default white">
+            {roleLines.map((line, i) => <>{line}{i < roleLines.length - 1 && <br />}</>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

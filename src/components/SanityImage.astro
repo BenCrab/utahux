@@ -1,0 +1,30 @@
+---
+import { sanitySrc, sanitySrcset } from '../lib/image';
+
+interface Props {
+  asset?: { url: string; metadata?: { dimensions?: { width: number }; lqip?: string } };
+  alt?: string;
+  class?: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { asset, alt = '', class: className, sizes, loading = 'lazy' } = Astro.props;
+const srcset = asset
+  ? sanitySrcset({ url: asset.url, width: asset.metadata?.dimensions?.width })
+  : undefined;
+---
+
+{
+  asset && (
+    <img
+      src={sanitySrc(asset.url)}
+      srcset={srcset}
+      sizes={srcset ? (sizes ?? '100vw') : undefined}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding="async"
+    />
+  )
+}

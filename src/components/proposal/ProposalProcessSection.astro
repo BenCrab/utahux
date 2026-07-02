@@ -1,0 +1,41 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading ?? 'Process & Timeline'}</h2>
+  </div>
+  <RichText value={node.intro} />
+  <ul class="deliver-list mt-12">
+    {
+      (node.steps ?? []).map((step: any) => (
+        <li>
+          <strong>
+            {step.heading}
+            {step.starred && <span style="color:var(--main);">*</span>}
+          </strong>
+          —{step.body}
+        </li>
+      ))
+    }
+  </ul>
+  {
+    node.footnote && (
+      <div class="p-default" style="margin-top:12px; padding-left:36px;">
+        <span style="color:var(--main); font-weight:700;">*</span> {node.footnote}
+      </div>
+    )
+  }
+  {
+    node.deliveryLabel && (
+      <>
+        <h3 class="blue mt-16">{node.deliveryLabel}</h3>
+        <div class="p-default" style="font-size:24px; line-height:34px;">{node.deliveryValue}</div>
+      </>
+    )
+  }
+</div>

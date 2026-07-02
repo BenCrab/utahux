@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudyHero from '../components/CaseStudyHero.astro';
+import OutcomePanel from '../components/OutcomePanel.astro';
+import Footer from '../components/Footer.astro';
+import DottedSection from '../components/blocks/DottedSection.astro';
+import ProcessStepBlock from '../components/blocks/ProcessStepBlock.astro';
+import ConceptGrid from '../components/blocks/ConceptGrid.astro';
+import TestBlock from '../components/blocks/TestBlock.astro';
+import Callout from '../components/blocks/Callout.astro';
+import LessonsLearned from '../components/blocks/LessonsLearned.astro';
+import { loadQuery } from '../lib/sanity';
+import { caseStudiesQuery } from '../lib/queries';
+
+export async function getStaticPaths() {
+  const caseStudies = await loadQuery<any[]>(caseStudiesQuery, {}, []);
+  return caseStudies
+    .filter((cs) => cs.slug)
+    .map((cs) => ({ params: { slug: cs.slug }, props: { caseStudy: cs } }));
+}
+
+const { caseStudy } = Astro.props;
+
+const blockComponents: Record<string, any> = {
+  dottedSection: DottedSection,
+  processStep: ProcessStepBlock,
+  conceptGrid: ConceptGrid,
+  testBlock: TestBlock,
+  callout: Callout,
+  lessonsLearned: LessonsLearned,
+};
+
+const title = caseStudy.seo?.metaTitle ?? `${caseStudy.title} • ${caseStudy.company} • Utah UX`;
+---
+
+<BaseLayout
+  title={title}
+  description={caseStudy.seo?.metaDescription}
+  bodyClass="body-project"
+>
+  <CaseStudyHero
+    company={caseStudy.company}
+    title={caseStudy.title}
+    logoUrl={caseStudy.companyLogo?.asset?.url}
+    teamMembers={caseStudy.teamMembers}
+    myRoles={caseStudy.myRoles}
+  />
+  <div class="section content-section">
+    <div class="wrapper top-wrap">
+      <div class="container-wide project-head">
+        <div class="sideline"></div>
+        <div class="main-content">
+          {caseStudy.outcome && <OutcomePanel outcome={caseStudy.outcome} />}
+          {
+            (caseStudy.body ?? []).map((block: any) => {
+              const Component = blockComponents[block._type];
+              return Component ? <Component node={block} /> : null;
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer variant="project" />
+</BaseLayout>
+
+<script>
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.min.css';
+  GLightbox({ selector: '.glightbox' });
+</script>

@@ -1,0 +1,25 @@
+---
+const { node } = Astro.props;
+const entries = node.entries ?? [];
+
+const statusClass = (status: string) =>
+  ({
+    success: 'status success',
+    failure: 'status',
+    savedForLater: 'status saved-for-later',
+  })[status] ?? 'status';
+---
+
+<div class="heading-image">
+  <h4 class="blue mt-16">{node.label ?? 'KEY'}</h4>
+  <div class="statuses">
+    {
+      entries.map((e: any, i: number) => (
+        <div class={i === entries.length - 1 ? 'status-key right' : 'status-key'}>
+          <div class={statusClass(e.status)}>{e.statusText}</div>
+          <div class="gray-span small _24">{e.description}</div>
+        </div>
+      ))
+    }
+  </div>
+</div>
