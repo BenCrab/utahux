@@ -1,0 +1,34 @@
+---
+import { PortableText } from 'astro-portabletext';
+import Block from './pt/Block.astro';
+import BlockPlain from './pt/BlockPlain.astro';
+import BlockWhite from './pt/BlockWhite.astro';
+import BlockNet from './pt/BlockNet.astro';
+import BlockJobs from './pt/BlockJobs.astro';
+import List from './pt/List.astro';
+import Link from './pt/Link.astro';
+import InlineLink from './pt/InlineLink.astro';
+
+interface Props {
+  value: unknown;
+  variant?: 'default' | 'plain' | 'white' | 'net' | 'jobs';
+}
+
+const { value, variant = 'default' } = Astro.props;
+
+const blockComponent = {
+  default: Block,
+  plain: BlockPlain,
+  white: BlockWhite,
+  net: BlockNet,
+  jobs: BlockJobs,
+}[variant];
+
+const components = {
+  block: blockComponent,
+  list: List,
+  mark: { link: Link, inlineLink: InlineLink },
+};
+---
+
+{value && <PortableText value={value} components={components} />}

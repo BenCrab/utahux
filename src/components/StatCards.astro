@@ -1,0 +1,20 @@
+---
+const stats = [
+  { value: '$30m+', label: 'Revenue Generated' },
+  { value: '10m+ ', label: 'Customers Impacted' },
+  { value: '9+ ', label: 'Years of UX Experience' },
+];
+---
+
+<div class="container-wide sub-projects">
+  <div class="outcome-cards on-home-page">
+    {
+      stats.map((s) => (
+        <div class="outcome-card on-home-page">
+          <h2 class="blue kpi">{s.value}</h2>
+          <div class="p-default-bold kpi">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+</div>

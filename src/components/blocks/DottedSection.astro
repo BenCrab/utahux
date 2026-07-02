@@ -1,0 +1,26 @@
+---
+import PortableBody from '../PortableBody.astro';
+
+const { node } = Astro.props;
+const { heading, headingLevel = 'h2', anchorId, content } = node;
+---
+
+<div class={headingLevel === 'h4' ? 'head-para concept-p' : 'head-para'}>
+  {
+    headingLevel === 'h4NoDot' ? (
+      <h4 class="blue mt-16">{heading}</h4>
+    ) : (
+      <div class="head-dot-container">
+        <img src="/assets/dot.svg" loading="lazy" alt="" class="line-dot" />
+        {headingLevel === 'h4' ? (
+          <h4 id={anchorId || undefined} class="blue mt-16 main-line">
+            {heading}
+          </h4>
+        ) : (
+          <h2 id={anchorId || undefined}>{heading}</h2>
+        )}
+      </div>
+    )
+  }
+  <PortableBody value={content} />
+</div>

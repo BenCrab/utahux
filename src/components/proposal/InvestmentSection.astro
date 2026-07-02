@@ -1,0 +1,23 @@
+---
+const { node } = Astro.props;
+---
+
+<div class="head-para investment-block">
+  <div class="step-head-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading ?? 'Investment'}</h2>
+  </div>
+  <div class="price">{node.price}</div>
+  {
+    (node.terms ?? []).map((term: any) => (
+      <>
+        <h3 class="blue mt-16">{term.heading}</h3>
+        <div class="p-default">{term.body}</div>
+      </>
+    ))
+  }
+  <h3 class="blue mt-16">{node.nextStepsHeading ?? 'NEXT STEPS'}</h3>
+  <ul class="deliver-list">
+    {(node.nextSteps ?? []).map((step: string) => <li>{step}</li>)}
+  </ul>
+</div>

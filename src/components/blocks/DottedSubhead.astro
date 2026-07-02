@@ -1,0 +1,9 @@
+---
+const { node } = Astro.props;
+const pos = node.dotPosition && node.dotPosition !== 'default' ? ` ${node.dotPosition}` : '';
+---
+
+<div class={`head-dot-container${pos}`}>
+  <img src="/assets/dot.svg" loading="lazy" alt="" class="line-dot" />
+  <h4 class="blue mt-16 main-line">{node.text}</h4>
+</div>

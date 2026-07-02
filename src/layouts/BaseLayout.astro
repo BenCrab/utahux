@@ -1,0 +1,63 @@
+---
+import '@fontsource/nunito/300.css';
+import '@fontsource/nunito/400.css';
+import '@fontsource/nunito/700.css';
+import nunito400 from '@fontsource/nunito/files/nunito-latin-400-normal.woff2?url';
+import nunito700 from '@fontsource/nunito/files/nunito-latin-700-normal.woff2?url';
+import '../styles/webflow.css';
+import '../styles/site.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  bodyClass?: string;
+  noindex?: boolean;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  bodyClass = 'body',
+  noindex = false,
+  ogImage,
+} = Astro.props;
+
+const ogImageUrl = ogImage ?? new URL('/assets/og-l.png', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" href={nunito400} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={nunito700} crossorigin />
+    <script is:inline>
+      !(function (o, c) {
+        var n = c.documentElement,
+          t = ' w-mod-';
+        n.className += t + 'js';
+        ('ontouchstart' in o || (o.DocumentTouch && c instanceof DocumentTouch)) &&
+          (n.className += t + 'touch');
+      })(window, document);
+    </script>
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

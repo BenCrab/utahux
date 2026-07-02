@@ -1,0 +1,326 @@
+/* ================================================
+   Shared Proposal Styles — Utah UX, LLC
+   Used across all client proposals.
+   (Extracted from the inline <style> blocks of the
+   original proposal pages; identical in both.)
+   ================================================ */
+
+/* Subheadings — h3 sized to match h4 for visual consistency */
+.main-content h3 {
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Tables */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 16px;
+  font-family: Nunito, sans-serif;
+}
+.comparison-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--main);
+  border-bottom: 2px solid var(--main);
+}
+.comparison-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 22px;
+  font-weight: 300;
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+.comparison-table td:first-child {
+  font-weight: 700;
+  white-space: nowrap;
+  width: 140px;
+}
+.comparison-table .before {
+  color: #767676;
+}
+.comparison-table .after {
+  color: var(--text-main);
+}
+
+/* Page cards grid */
+.pages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+  margin-left: 0;
+}
+.page-item {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.page-item .page-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
+}
+.page-item .page-desc {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* Key enhancement cards */
+.outcome-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Investment */
+.investment-block {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+.investment-block .price {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--main);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  line-height: 56px;
+}
+
+/* Numbered bullet lists */
+.maintain-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+  counter-reset: maintain-counter;
+}
+.maintain-list li {
+  padding: 8px 0 8px 36px;
+  position: relative;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  counter-increment: maintain-counter;
+}
+.maintain-list li::before {
+  content: counter(maintain-counter);
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 24px;
+  height: 24px;
+  background: var(--main);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.deliver-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+  counter-reset: deliver-counter;
+}
+.deliver-list li {
+  padding: 6px 0 6px 36px;
+  position: relative;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  counter-increment: deliver-counter;
+}
+.deliver-list li::before {
+  content: counter(deliver-counter);
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 24px;
+  height: 24px;
+  background: var(--main);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Layout: sideline + dots */
+.container-wide.project-head {
+  position: relative;
+  margin-top: 32px;
+}
+.main-content > .head-para:first-child {
+  margin-top: 0;
+  padding-top: 48px;
+}
+.container-wide.project-head > .sideline {
+  border-left: 4px solid var(--main);
+  width: 4px;
+  margin-top: 48px;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: -3px;
+}
+.container-wide.project-head > .main-content {
+  margin-left: 36px;
+}
+.line-dot {
+  width: 18px;
+  margin-left: -46px;
+  position: absolute;
+}
+
+/* Footer branding */
+.proposal-branding {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.proposal-branding img {
+  height: 40px;
+}
+.proposal-branding .copyright {
+  font-size: 14px;
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+/* Client-agnostic overrides (identical in both original proposals) */
+.section-project,
+.container-wide.footer.pro-foot {
+  background-image: url('/assets/noise.png') !important;
+  background-size: 200px 200px !important;
+  background-repeat: repeat !important;
+  background-position: 0 0 !important;
+}
+#proposal-title {
+  font-size: 48px !important;
+  line-height: 56px !important;
+}
+
+/* ================================================
+   Responsive
+   ================================================ */
+@media screen and (max-width: 767px) {
+  .container-wide.project-head > .sideline {
+    display: none;
+  }
+  .container-wide.project-head > .main-content {
+    margin-left: 0;
+  }
+  .line-dot {
+    display: none;
+  }
+  .project-logo-name {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+  .project-company-name {
+    margin-left: 0 !important;
+  }
+  .main-content h2 {
+    font-size: 32px !important;
+    line-height: 40px !important;
+  }
+  .main-content > .head-para:first-child .p-default {
+    font-size: 24px !important;
+    line-height: 34px !important;
+  }
+  .embed-footer {
+    display: block !important;
+  }
+  .embed-footer .btn-secondary.with-arrow {
+    padding: 12px 24px !important;
+    font-size: 16px !important;
+  }
+  .main-content .p-default,
+  .main-content .deliver-list li,
+  .main-content .maintain-list li,
+  .investment-block .p-default,
+  .investment-block .deliver-list li {
+    font-size: 18px !important;
+    line-height: 28px !important;
+  }
+  .main-content .page-item .page-desc,
+  .main-content .comparison-table td {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+  .h2.white {
+    font-size: 32px !important;
+    line-height: 40px !important;
+  }
+}
+@media screen and (max-width: 479px) {
+  .pages-grid {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+  }
+  .comparison-table td:first-child {
+    white-space: normal;
+  }
+  .investment-block .price {
+    font-size: 40px;
+  }
+  .project-logo-name {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+  .wrapper.top-wrap {
+    margin-top: -32px !important;
+  }
+  .container-wide.project-head {
+    margin-top: 32px !important;
+  }
+  .main-content > .head-para:first-child {
+    padding-top: 48px !important;
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 430px) {
+  .main-content h2 {
+    font-size: 24px !important;
+    line-height: 32px !important;
+  }
+  .h2.white {
+    font-size: 24px !important;
+    line-height: 32px !important;
+  }
+  #proposal-title {
+    font-size: 40px !important;
+    line-height: 48px !important;
+  }
+}
+@media screen and (max-width: 390px) {
+  .team-roles {
+    flex-direction: column !important;
+  }
+  .div-block-4 {
+    margin-left: 0 !important;
+    margin-top: 16px;
+  }
+}

@@ -1,0 +1,26 @@
+---
+import SanityImage from '../SanityImage.astro';
+
+const { node } = Astro.props;
+const cards = [
+  { data: node.left, side: 'left' },
+  ...(node.right?.pdf ? [{ data: node.right, side: 'right' }] : []),
+];
+---
+
+<div class="pdf-holder">
+  {
+    cards.map(({ data, side }) => (
+      <div class={side}>
+        <h4>{data.label}</h4>
+        <a href={data.pdf?.asset?.url} target="_blank" class="pdf-card w-inline-block">
+          <SanityImage asset={data.thumbnail?.asset} alt="" />
+          <div class="see-pdf">
+            <div class="p-default-bold blue">See PDF</div>
+            <img src="/assets/arrow-right.svg" loading="lazy" alt="" />
+          </div>
+        </a>
+      </div>
+    ))
+  }
+</div>

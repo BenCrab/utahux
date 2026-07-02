@@ -1,0 +1,41 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+const { number, heading, anchorId, intro, activitiesDeliverables } = node;
+---
+
+<div class="head-para">
+  <div class="step-head-container">
+    <img
+      src={`/assets/num-${number}.svg`}
+      loading="lazy"
+      alt={`The number ${number}`}
+      class="image-7"
+    />
+    <h2 id={anchorId || undefined} class="blue">{heading}</h2>
+  </div>
+  <RichText value={intro} />
+  {
+    activitiesDeliverables && (
+      <div class="activities-deliverables">
+        <div class="left">
+          <h4>ACTIVITIES</h4>
+          <ul role="list" class="ul">
+            {(activitiesDeliverables.activities ?? []).map((a: string) => (
+              <li>{a}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="right">
+          <h4>DELIVERABLES</h4>
+          <ul role="list" class="ul">
+            {(activitiesDeliverables.deliverables ?? []).map((d: string) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+</div>

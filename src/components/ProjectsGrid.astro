@@ -1,0 +1,134 @@
+---
+import { loadQuery } from '../lib/sanity';
+import { projectCardsQuery } from '../lib/queries';
+import { sanitySrc, sanitySrcset } from '../lib/image';
+import CalendlyButton from './CalendlyButton.astro';
+
+interface ProjectCard {
+  slug: string;
+  title: string;
+  card: {
+    cardTitle: string;
+    outcomeBlurb: string;
+    image?: { asset?: { url: string; metadata?: { dimensions?: { width: number } } } };
+    logoSmall?: { asset?: { url: string } };
+  };
+}
+
+// Fallback cards mirror the current static site so the page renders
+// identically before the Sanity content migration lands.
+const fallbackCards = [
+  {
+    href: '/ancestry/onboarding/',
+    src: '/assets/card-ancestry.png',
+    srcset: undefined as string | undefined,
+    sizes: undefined as string | undefined,
+    logo: '/assets/logo-ancestry-small.svg',
+    title: 'Product Onboarding',
+    blurb: '~$15 million increase in revenue.',
+  },
+  {
+    href: '/lendio/design-system/',
+    src: '/assets/card-lendio.png',
+    srcset: '/assets/card-lendio-p-500.png 500w, /assets/card-lendio.png 576w',
+    sizes: '(max-width: 479px) 100vw, 239.921875px',
+    logo: '/assets/logo-lendio-small.svg',
+    title: 'Lendio Design System',
+    blurb: 'Dev & UX efficiency/consistency',
+  },
+  {
+    href: '/byu/instruction-scheduler/',
+    src: '/assets/card-byu.png',
+    srcset: '/assets/card-byu-p-500.png 500w, /assets/card-byu.png 576w',
+    sizes: '(max-width: 479px) 100vw, 239.921875px',
+    logo: '/assets/logo-byu.svg',
+    title: 'Instruction Scheduler',
+    blurb: '~1.3k students scheduled/term',
+  },
+];
+
+const sanityCards = await loadQuery<ProjectCard[]>(projectCardsQuery, {}, []);
+
+const cards = sanityCards.length
+  ? sanityCards.map((c) => ({
+      href: `/${c.slug}/`,
+      src: c.card.image?.asset ? sanitySrc(c.card.image.asset.url) : '',
+      srcset: c.card.image?.asset
+        ? sanitySrcset({
+            url: c.card.image.asset.url,
+            width: c.card.image.asset.metadata?.dimensions?.width,
+          })
+        : undefined,
+      sizes: '(max-width: 479px) 100vw, 239.921875px',
+      logo: c.card.logoSmall?.asset?.url,
+      title: c.card.cardTitle,
+      blurb: c.card.outcomeBlurb,
+    }))
+  : fallbackCards;
+---
+
+<div class="container-wide projects">
+  <div class="container-narrow projects">
+    <div class="container-head">
+      <div class="ch-left">
+        <h2 class="white h2">Projects</h2>
+        <div class="p-default white header-p">
+          A selection of my in-house and freelance work.
+        </div>
+      </div>
+      <div class="embed w-embed w-script">
+        <a
+          class="btn-secondary with-arrow dark-hover"
+          href="#"
+          data-calendly-url="https://calendly.com/utahux/30min">Schedule time to chat</a
+        >
+      </div>
+    </div>
+    <div class="w-layout-grid projects-grid">
+      {
+        cards.map((card) => (
+          <a href={card.href} class="project-card w-inline-block">
+            <img
+              src={card.src}
+              loading="lazy"
+              srcset={card.srcset}
+              sizes={card.srcset ? card.sizes : undefined}
+              alt="thumbnail collage of design documents"
+              class="image-2"
+            />
+            <div class="project-card-lower">
+              <div class="logo-name">
+                {card.logo && <img src={card.logo} loading="lazy" alt="" class="logo-small" />}
+                <div class="p-default-bold ml-8">{card.title}</div>
+              </div>
+              <div class="outcome-blip">
+                <div class="p-default semi outcome-blip">Outcome •</div>
+                <div class="p-default semi grey">{card.blurb}</div>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+      <div class="embed w-embed w-script">
+        <a
+          class="project-card freelance blank link-full"
+          style="height: 100%; justify-content: center !important;"
+          href="#"
+          data-calendly-url="https://calendly.com/utahux/30min"
+        >
+          <div class="freelance-cta-text blank-card" style="display: flex;">
+            <p class="p-default semi no-line-height" style="margin-bottom: 12px; color: #fff;">
+              Want to see current projects?
+            </p>
+            <div
+              class="btn-secondary no-fill no-white-fill-on-hover w-button"
+              style="border: 1px solid #fff; color: #fff;"
+            >
+              Schedule a time to chat
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

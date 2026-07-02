@@ -1,0 +1,10 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+---
+
+<div class="h4-and-text">
+  <h4 class="blue mt-16">{node.label}</h4>
+  <RichText value={node.text} variant="jobs" />
+</div>

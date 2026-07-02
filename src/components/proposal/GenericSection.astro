@@ -1,0 +1,13 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading}</h2>
+  </div>
+  <RichText value={node.content} />
+</div>

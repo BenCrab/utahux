@@ -1,0 +1,166 @@
+---
+interface SideImg {
+  src: string;
+  class: string;
+  alt: string;
+}
+
+const steps: {
+  num: string;
+  numAlt: string;
+  heading: string;
+  sideImgs: SideImg[];
+  intro: string;
+  activities: string[];
+  deliverables: string[];
+}[] = [
+  {
+    num: '/assets/num-1.svg',
+    numAlt: 'The number 1',
+    heading: 'Learn + Map',
+    sideImgs: [
+      { src: '/assets/iterate-mobile.svg', class: 'iterate-mobile', alt: '' },
+      { src: '/assets/squiggle-1.svg', class: 'squiggle-top', alt: '' },
+      { src: '/assets/squiggle-3.svg', class: 'squiggle-mid', alt: '' },
+    ],
+    intro:
+      'During this stage I learn all I can about—and seek to gain an objective and empathetic understanding of—user needs, business needs, product/feature metrics for success, and the problem to be solved.',
+    activities: [
+      'Stakeholder interviews',
+      'Generative research (Interviews)',
+      'Contextual inquiry',
+      'Task analysis',
+      'Gathering of supporting analytics',
+      'Diagramming existing workflows',
+    ],
+    deliverables: [
+      'Project Proposal or Feature Brief(s)',
+      'Overview of jobs-to-be-done',
+      'Existing workflow diagrams',
+      'Summary of qualitative data collected',
+      'Summary of quantitative data collected',
+    ],
+  },
+  {
+    num: '/assets/num-2.svg',
+    numAlt: 'The number 2',
+    heading: 'Design + Test',
+    sideImgs: [
+      { src: '/assets/squiggle-1.svg', class: 'squiggle-top', alt: '' },
+      { src: '/assets/squiggle-2.svg', class: 'squiggle-top', alt: '' },
+      { src: '/assets/iterate-mobile.svg', class: 'iterate-mobile', alt: '' },
+    ],
+    intro:
+      'During this stage I start by sketching possible new workflow diagrams for the product or feature. After each usability test or design review—I iteratively increase the level of design fidelity from workflow diagrams, to wireframes, from wireframes to visually designed mockups, and then eventually to interactive prototypes in Figma or HTML/SCSS.',
+    activities: [
+      'Generative research (Interviews)',
+      'Diagramming new workflows',
+      'Info. Architecture creation',
+      'Wireframe mockup creation',
+      'Visual design mockup creation',
+      'Interact. design mockup creation',
+      'Iterative usability testing',
+      'Summative usability testing',
+    ],
+    deliverables: [
+      'Workflow diagrams/I.A. docs',
+      'Wireframes mockups',
+      'Visual design mockups',
+      'Visual design specification doc',
+      'Interaction design mockups',
+      'Interaction design specification docs',
+      'HTML/SCSS specification doc',
+      'Usability test results for each phase',
+    ],
+  },
+  {
+    num: '/assets/num-3.svg',
+    numAlt: 'The number 3',
+    heading: 'Launch + Learn',
+    sideImgs: [
+      { src: '/assets/squiggle-1.svg', class: 'squiggle-top', alt: '' },
+      { src: '/assets/squiggle-3.svg', class: 'squiggle-top', alt: '' },
+      { src: '/assets/iterate-mobile.svg', class: 'iterate-mobile', alt: '' },
+    ],
+    intro:
+      'During this last stage, I hand off a polished prototype—or sometimes a quick bug fix—to the developers. Since I work with the developer(s) throughout my design process, there are no surprises for them or me when this final hand off occurs. I work with developers to implement designs with exactness, and make myself available to answer any questions they have—or clarifications they need—regarding implementation details.',
+    activities: [
+      'Set up analytics',
+      'Development hand off doc',
+      'Design implementation support',
+      'Feedback follow-up',
+    ],
+    deliverables: [
+      'Ensure analytics are working properly',
+      'Development hand off doc',
+      'Prototyped interactions—if any',
+      'Quick tweaks/bug fixes',
+    ],
+  },
+];
+---
+
+<div id="process" class="section process">
+  <div class="wrapper">
+    <div class="container-wide">
+      <div class="container-narrow projects process">
+        <div class="container-head process">
+          <div class="ch-left">
+            <h2 class="heading">Process</h2>
+          </div>
+          <a
+            href="/assets/process.pdf"
+            target="_blank"
+            class="btn-secondary with-arrow w-inline-block"
+          >
+            <div>Download PDF</div>
+            <img src="/assets/arrow-right.svg" loading="lazy" alt="" class="arrow-right" />
+          </a>
+        </div>
+        <div class="p-default process-description">
+          My process is simple: start with customers, iteratively test with customers, and deliver
+          value to customers.
+        </div>
+        {
+          steps.map((step) => (
+            <div class="index-step">
+              <div class="side-content">
+                <img src={step.num} loading="lazy" alt={step.numAlt} class="image-4" />
+                {step.sideImgs.map((img) => (
+                  <img src={img.src} loading="lazy" alt={img.alt} class={img.class} />
+                ))}
+              </div>
+              <div class="primary-content">
+                <div class="mobile-numbers">
+                  <img src={step.num} loading="lazy" alt={step.numAlt} class="numb" />
+                  <h2 class="blue ml-16">{step.heading}</h2>
+                </div>
+                <div class="step-content ml-16">
+                  <div class="p-default top-step-p">{step.intro}</div>
+                  <div class="activities-deliverables">
+                    <div class="left">
+                      <h4>COMMON ACTIVITIES</h4>
+                      <ul role="list" class="ul">
+                        {step.activities.map((a) => (
+                          <li>{a}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="right">
+                      <h4>COMMON DELIVERABLES</h4>
+                      <ul role="list" class="ul">
+                        {step.deliverables.map((d) => (
+                          <li>{d}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

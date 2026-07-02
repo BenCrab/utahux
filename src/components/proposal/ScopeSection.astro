@@ -1,0 +1,32 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading ?? 'Project Scope & Deliverables'}</h2>
+  </div>
+  <RichText value={node.intro} />
+  <ul class="deliver-list mt-12">
+    {
+      (node.deliverables ?? []).map((d: any) => (
+        <li>
+          <strong>{d.heading}</strong>—{d.body}
+          {d.pagesGrid?.length > 0 && (
+            <div class="pages-grid" style="margin-top:12px; margin-bottom:12px;">
+              {d.pagesGrid.map((p: any) => (
+                <div class="page-item">
+                  <span class="page-name" set:html={p.name} />
+                  <span class="page-desc">{p.desc}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

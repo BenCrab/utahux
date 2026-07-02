@@ -1,0 +1,42 @@
+---
+// Renders dottedSection.content: portable-text blocks mixed with custom objects.
+import { PortableText } from 'astro-portabletext';
+import Block from './pt/Block.astro';
+import List from './pt/List.astro';
+import Link from './pt/Link.astro';
+import InlineLink from './pt/InlineLink.astro';
+import ImageFigure from './blocks/ImageFigure.astro';
+import ImageScroller from './blocks/ImageScroller.astro';
+import PdfCardRow from './blocks/PdfCardRow.astro';
+import StatusKey from './blocks/StatusKey.astro';
+import QuoteList from './blocks/QuoteList.astro';
+import VideoEmbed from './blocks/VideoEmbed.astro';
+import CtaButton from './blocks/CtaButton.astro';
+import DottedSubhead from './blocks/DottedSubhead.astro';
+import LabeledText from './blocks/LabeledText.astro';
+
+interface Props {
+  value: unknown;
+}
+
+const { value } = Astro.props;
+
+const components = {
+  block: Block,
+  list: List,
+  mark: { link: Link, inlineLink: InlineLink },
+  type: {
+    imageFigure: ImageFigure,
+    imageScroller: ImageScroller,
+    pdfCardRow: PdfCardRow,
+    statusKey: StatusKey,
+    quoteList: QuoteList,
+    videoEmbed: VideoEmbed,
+    ctaButton: CtaButton,
+    dottedSubhead: DottedSubhead,
+    labeledText: LabeledText,
+  },
+};
+---
+
+{value && <PortableText value={value} components={components} />}

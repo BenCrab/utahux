@@ -1,0 +1,115 @@
+---
+import CalendlyButton from './CalendlyButton.astro';
+
+interface Props {
+  variant?: 'home' | 'project';
+}
+
+const { variant = 'project' } = Astro.props;
+const isHome = variant === 'home';
+---
+
+<div class="container-wide footer pro-foot">
+  <div class:list={['container-narrow', isHome ? 'footer-only' : 'footer']}>
+    <div class="container-head">
+      <div class="ch-left footer-top">
+        <h2 class="white h2">Contact</h2>
+        <div class="p-default white footer-p">
+          Ask me questions, reach out about a potential project, or just say hi.
+        </div>
+        <div class="social-icons">
+          <a
+            href="mailto:ben@utahux.com?subject=Mail%20From%20Your%20Portfolio%20Site"
+            class="w-inline-block"
+          >
+            <img src="/assets/icon-email.svg" loading="lazy" alt="Email icon" class="social-link" />
+          </a>
+          <a
+            href="https://dribbble.com/_bctree"
+            target="_blank"
+            class="second-social w-inline-block"
+          >
+            <img
+              src="/assets/icon-dribbble.svg"
+              loading="lazy"
+              alt="Dribble.com icon"
+              class="social-link"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ben-crabtree-582b0180/"
+            target="_blank"
+            class="third-social w-inline-block"
+          >
+            <img
+              src="/assets/icon-linkedin.svg"
+              loading="lazy"
+              alt="Linkedin icon"
+              class="social-link"
+            />
+          </a>
+        </div>
+      </div>
+      <CalendlyButton label="Schedule a time to chat" />
+    </div>
+  </div>
+  <div
+    data-animation="default"
+    data-collapse="none"
+    data-duration="400"
+    data-easing="ease"
+    data-easing2="ease"
+    role="banner"
+    class="navbar footer w-nav"
+  >
+    <div class:list={['container-narrow', isHome ? 'bottom-footer' : 'align-center footer', 'w-container']}>
+      <div class="footer-links">
+        <a href={isHome ? '#top' : '/'} class="brand w-nav-brand">
+          <img
+            src="/assets/utahux-logo-white.svg"
+            loading="lazy"
+            alt="Utah UX logo"
+            class="image-6"
+          />
+        </a>
+        {
+          isHome && (
+            <nav role="navigation" class="w-nav-menu">
+              <a href="#projects" class="nav-link footer w-nav-link">
+                Projects
+              </a>
+              <a href="#process" class="nav-link footer w-nav-link">
+                Process
+              </a>
+              <a href="/crabtree-2026.pdf" class="nav-link footer w-nav-link">
+                Résumé
+              </a>
+            </nav>
+          )
+        }
+      </div>
+      <a href="#top" class="link-btn footer w-inline-block">
+        <div class="p-default-bold white">Back to top</div>
+        <div class="div-block-2">
+          <img
+            src="/assets/arrow-up-circle.svg"
+            loading="lazy"
+            alt=""
+            class="arrow-up-circle"
+          />
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class:list={['container-narrow', isHome ? 'footer-copy' : 'footer']}>
+    <div class="ch-left footer">
+      <div class="p-default white footer-p copyright">
+        <span class="text-span">©</span> Copyright 2025 • Utah UX, LLC<br />
+      </div>
+      <div class="p-default white footer-p copyright small">
+        This site was designed and developed by yours truly. <br />🎨 💻<br />
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../scripts/calendly.js"></script>

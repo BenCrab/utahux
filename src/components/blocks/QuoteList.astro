@@ -1,0 +1,8 @@
+---
+const { node } = Astro.props;
+---
+
+<h4 class="blue mt-16 main-line">{node.label}</h4>
+<ul role="list" class="ul">
+  {(node.quotes ?? []).map((q: string) => <li>{q}<br /></li>)}
+</ul>

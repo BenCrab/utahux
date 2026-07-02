@@ -1,0 +1,54 @@
+---
+const { node } = Astro.props;
+const cards: string[] = node.cards ?? [];
+const table = node.table;
+
+const cellClass = (columns: string[], colIndex: number): string | undefined => {
+  const header = (columns?.[colIndex] ?? '').toLowerCase();
+  if (header === 'before') return 'before';
+  if (header === 'after') return 'after';
+  return undefined;
+};
+---
+
+<div class="head-para">
+  <div class="head-dot-container">
+    <img src="/assets/dot.svg" loading="lazy" alt="" aria-hidden="true" class="line-dot" />
+    <h2>{node.heading}</h2>
+  </div>
+
+  <div class="outcome-cards" style="margin-top:24px;">
+    {
+      cards.map((text, i) => (
+        <div class={i === cards.length - 1 ? 'outcome-card last-card' : 'outcome-card'}>
+          <div class="blue kpi" style="font-size:24px; font-weight:700; line-height:32px;">
+            {text}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    table?.rows?.length > 0 && (
+      <table class="comparison-table mt-12">
+        <thead>
+          <tr>
+            {(table.columns ?? []).map((c: string) => (
+              <th>{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row: any) => (
+            <tr>
+              {(row.cells ?? []).map((cell: string, i: number) => (
+                <td class={cellClass(table.columns, i)}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+  }
+</div>

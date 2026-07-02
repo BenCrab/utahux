@@ -1,0 +1,19 @@
+---
+import RichText from '../RichText.astro';
+
+const { node } = Astro.props;
+const isMistake = node.variant === 'mistake';
+---
+
+<div class={isMistake ? 'head-para mistake' : 'head-para'}>
+  <div class="head-dot-container">
+    <img
+      src={isMistake ? '/assets/dot-mistake.svg' : '/assets/dot-note.svg'}
+      loading="lazy"
+      alt=""
+      class="line-dot"
+    />
+    <h4>{node.label}</h4>
+  </div>
+  <RichText value={node.body} />
+</div>

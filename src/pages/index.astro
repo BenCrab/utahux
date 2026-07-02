@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/HomeHero.astro';
+import StatCards from '../components/StatCards.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import WorkHistory from '../components/WorkHistory.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import Footer from '../components/Footer.astro';
+
+const description =
+  'What can I do to benefit your life through design? This is the question at the core of my UX design practice—both towards the organization I serve, and the customers who use the products I help create.';
+---
+
+<BaseLayout
+  title="Utah UX • Product Design Services"
+  description={description}
+  bodyClass="body"
+>
+  <HomeHero />
+  <div id="projects" class="section">
+    <div class="wrapper projects">
+      <StatCards />
+      <ProjectsGrid />
+      <WorkHistory />
+    </div>
+  </div>
+  <ProcessSection />
+  <Footer variant="home" />
+</BaseLayout>
