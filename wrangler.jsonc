@@ -1,5 +1,6 @@
 {
   "name": "utahux",
+  "account_id": "69d320251870505aa6dd7df51ce2dc3f",
   "compatibility_date": "2026-07-01",
   "assets": {
     "directory": "./dist",
